@@ -1,29 +1,27 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <v-toolbar-title>Vue Dev Test</v-toolbar-title>
-    </v-app-bar>
-
+    <MainAppBar :title="appTitle" />
     <v-main>
       <router-view></router-view>
     </v-main>
-
-    <v-footer padless color="primary" dark>
-      <v-col class="text-center" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Vue Dev Test</strong>
-      </v-col>
-    </v-footer>
+    <MainFooter :label="appTitle" :year="currentYear" />
   </v-app>
 </template>
 
 <script>
+import MainAppBar from '@/components/MainAppBar.vue'
+import MainFooter from '@/components/MainFooter.vue'
+
 export default {
   name: 'App',
 
-  components: {},
+  components: { MainAppBar, MainFooter },
 
-  data: () => ({
-    //
-  })
+  data: () => {
+    return {
+      appTitle: 'Vue Dev Test',
+      currentYear: new Date().getFullYear()
+    }
+  }
 }
 </script>
