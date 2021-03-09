@@ -17,7 +17,7 @@ describe('MainFooter', () => {
 
   test('When rendered should show the passed year and label', async () => {
     const wrapper = mount(MainFooter, { localVue, vuetify })
-    wrapper.setProps({ label: 'Testing footer', year: '2021' })
+    wrapper.setProps({ label: 'Testing footer', year: 2021 })
     await wrapper.vm.$nextTick()
     expect(wrapper.find('[data-testid="main-footer"]').html()).toContain(
       '2021 — <strong>Testing footer</strong>'
