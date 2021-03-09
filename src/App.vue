@@ -2,13 +2,6 @@
   <v-app>
     <MainAppBar :title="appTitle" />
     <v-main>
-      <v-alert
-        :type="notification.type"
-        v-for="notification in notifications"
-        :key="notification.id"
-      >
-        {{ notification.message }}
-      </v-alert>
       <router-view></router-view>
     </v-main>
     <MainFooter :label="appTitle" :year="currentYear" />
@@ -41,3 +34,8 @@ export default {
   computed: mapState('notification', ['notifications'])
 }
 </script>
+<style>
+html {
+  overflow: auto;
+}
+</style>

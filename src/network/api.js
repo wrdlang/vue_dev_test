@@ -2,7 +2,7 @@ import axiosInstance, { CATEGORIES_URL, PRANK_IDEAS_URL } from './config.js'
 
 export default {
   fetchCategoris(filters) {
-    return axiosInstance.get(`${CATEGORIES_URL}ss?${filters}`)
+    return axiosInstance.get(`${CATEGORIES_URL}?${filters}`)
   },
 
   fetchPrankIdeas(categorySlug, page, limit) {

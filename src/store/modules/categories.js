@@ -22,7 +22,8 @@ export const actions = {
         'notification/add',
         {
           type: 'error',
-          message: error.response.data.message ?? 'Unable to fetch categories'
+          message:
+            error?.response?.data?.message ?? 'Unable to fetch categories'
         },
         { root: true }
       )
