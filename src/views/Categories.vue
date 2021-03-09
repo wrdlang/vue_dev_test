@@ -1,40 +1,49 @@
 <template>
   <v-container>
-    <v-skeleton-loader
-      class="mx-auto"
-      max-width="500"
-      type="card-heading, list-item-avatar, list-item-avatar, list-item-avatar"
-    ></v-skeleton-loader>
-
-    <v-dialog
-      v-model="showModal"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <v-toolbar dark color="primary">
-        <v-btn icon dark @click="handleClose">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-toolbar-title>Category Pranks</v-toolbar-title>
-      </v-toolbar>
+    <LoadingSkeleton v-if="loading" />
+    <CategoriesList v-if="!loading" :categories="categories" />
+    <FullScreenDialog :show="showModal" title="Categories">
       <router-view></router-view>
-    </v-dialog>
+    </FullScreenDialog>
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import LoadingSkeleton from '@/components/categories/LoadingSkeleton.vue'
+import CategoriesList from '@/components/categories/CategoriesList.vue'
+import FullScreenDialog from '@/components/FullScreenDialog.vue'
+
 export default {
   name: 'Categories',
+  components: {
+    LoadingSkeleton,
+    FullScreenDialog,
+    CategoriesList
+  },
+  async created() {
+    await this.fetchCategories(this.filters)
+    this.loading = false
+  },
   data() {
     return {
+      loading: true,
+      slugs: [
+        'view-all-pranks',
+        'new-prank-calls',
+        'food-restaurant-prank-calls'
+      ],
       showModal: this.$route.meta.showModal
     }
   },
+  computed: {
+    filters() {
+      return `filters[slug][]=${this.slugs.join('&filters[slug][]=')}`
+    },
+    ...mapGetters('categories', ['categories'])
+  },
   methods: {
-    handleClose() {
-      this.$router.go(-1)
-    }
+    ...mapActions('categories', ['fetchCategories'])
   },
   watch: {
     '$route.meta'({ showModal }) {

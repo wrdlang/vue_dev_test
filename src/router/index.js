@@ -7,19 +7,19 @@ const routes = [
   {
     path: '/',
     name: 'categories',
-    component: () => import('../views/Categories.vue'),
+    component: () => import('@/views/Categories.vue'),
     children: [
       {
         path: '/:categoryslug',
         name: 'pranks',
-        component: () => import('../views/Pranks.vue'),
+        component: () => import('@/views/Pranks.vue'),
         meta: {
           showModal: true
         }
       }
     ]
   },
-  { path: '*', component: () => import('../views/NotFound.vue') }
+  { path: '*', component: () => import('@/views/NotFound.vue') }
 ]
 
 const router = new VueRouter({

@@ -8,6 +8,15 @@
 
 <script>
 export default {
-  props: ['label', 'year']
+  props: {
+    label: {
+      type: String,
+      default: ''
+    },
+    year: {
+      type: Number,
+      default: 0
+    }
+  }
 }
 </script>
