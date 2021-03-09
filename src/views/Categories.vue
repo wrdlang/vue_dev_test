@@ -1,8 +1,11 @@
 <template>
-  <v-container>
-    <LoadingSkeleton v-if="loading" />
+  <v-container fluid>
+    <LoadingSkeleton
+      v-if="loading"
+      type="card-heading, list-item-avatar, list-item-avatar, list-item-avatar"
+    />
     <CategoriesList v-if="!loading" :categories="categories" />
-    <FullScreenDialog :show="showModal" title="Categories">
+    <FullScreenDialog :show="showModal" :title="$route.params.categoryslug">
       <router-view></router-view>
     </FullScreenDialog>
   </v-container>
@@ -10,7 +13,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import LoadingSkeleton from '@/components/categories/LoadingSkeleton.vue'
+import LoadingSkeleton from '@/components/LoadingSkeleton.vue'
 import CategoriesList from '@/components/categories/CategoriesList.vue'
 import FullScreenDialog from '@/components/FullScreenDialog.vue'
 
